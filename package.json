@@ -7,17 +7,20 @@
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
     "prestart": "npm run build",
-    "start": "node .",
+    "start": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "ts-node": "^8.8.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.4",
     "@types/node": "^13.11.0",
+    "nodemon": "^2.0.2",
     "tslint": "^6.1.1",
     "typescript": "^3.8.3"
   }

@@ -5,7 +5,7 @@ const pokemonSchema = new Schema({
   name: { type: String, required: true },
   image: { type: String, default: "" },
   price: { type: Number, default: 0 },
-  type: { type: String, default: "" }
+  type: { type: Array, default: [] }
 });
 
 const pokemonModel = model("Pokemon", pokemonSchema);

@@ -22,5 +22,5 @@ export type Pokemon = {
   name: string;
   image: string;
   price: number;
-  type: PokemonTypes;
+  type: PokemonTypes[];
 };

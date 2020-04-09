@@ -3,8 +3,10 @@ import {
   createPokemon,
   listAllPokemon,
   getPokemonByName,
-  deletePokemon,
-  editPokemon
+  deletePokemonById,
+  deletePokemonByName,
+  editPokemonById,
+  editPokemonByName
 } from "../services/pokemon";
 
 const router = express.Router();
@@ -15,8 +17,12 @@ router.get("/", listAllPokemon);
 
 router.get("/:name", getPokemonByName);
 
-router.put("/:id", editPokemon);
+router.put("/:id", editPokemonById);
 
-router.delete("/:id", deletePokemon);
+router.delete("/:id", deletePokemonById);
+
+router.delete("/", deletePokemonByName);
+
+router.put("/", editPokemonByName);
 
 export default router;

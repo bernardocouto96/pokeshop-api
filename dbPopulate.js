@@ -3,7 +3,7 @@ const axios = require("axios");
 const pokeApiUrl = "https://pokeapi.co/api/v2";
 const pokeStoreApiUrl = "http://localhost:3000";
 
-var pokemonNumbers = [...Array(151).keys()];
+const pokemonNumbers = [...Array(151).keys()];
 
 pokemonNumbers.map(async number => {
   const { data } = await axios.get(`${pokeApiUrl}/pokemon/${number + 1}`);

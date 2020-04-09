@@ -18,7 +18,6 @@ type PokemonTypes =
   | "normal";
 
 export type Pokemon = {
-  number: number;
   name: string;
   image: string;
   price: number;

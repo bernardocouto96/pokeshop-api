@@ -5,9 +5,11 @@ import setMiddlewares from "./middlewares";
 
 const app = express();
 
+const port = process.env.PORT || config.PORT;
+
 dbConnect(config.MONGO_DB_URL);
 setMiddlewares(app);
 
-app.listen(config.PORT, () => {
-  console.log(`Servidor rodando na porta ${config.PORT}`);
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
 });

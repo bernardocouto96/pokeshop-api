@@ -4,9 +4,7 @@ import {
   listAllPokemon,
   getPokemonByName,
   deletePokemonById,
-  deletePokemonByName,
-  editPokemonById,
-  editPokemonByName
+  editPokemonById
 } from "../services/pokemon";
 
 const router = express.Router();
@@ -20,9 +18,5 @@ router.get("/:name", getPokemonByName);
 router.put("/:id", editPokemonById);
 
 router.delete("/:id", deletePokemonById);
-
-router.delete("/", deletePokemonByName);
-
-router.put("/", editPokemonByName);
 
 export default router;

@@ -23,14 +23,34 @@ export const createPokemon = async (req: Request, res: Response) => {
 export const getPokemonByName = async (req: Request, res: Response) => {
   const { name } = req.params;
   const dbResponse = await pokemonModel.find({ name });
-  res.send(dbResponse);
+  const pokemon = dbResponse[0];
+
+  if (!pokemon) {
+    return res.status(404).send();
+  }
+
+  return res.send(pokemon);
 };
 
 export const listAllPokemon = async (req: Request, res: Response) => {
   const { query } = req;
-  const dbResponse = await pokemonModel.find(query);
 
-  res.send(dbResponse);
+  const dbQuery = { ...query, page: undefined, limit: undefined };
+
+  const page = parseInt(query.page, 10) || 0;
+  const limit = parseInt(query.limit, 10) || 10;
+
+  try {
+    const dbResponse = await pokemonModel
+      .find(dbQuery)
+      .skip(page * limit)
+      .limit(limit)
+      .sort({ number: "ascending" });
+
+    res.send(dbResponse);
+  } catch (error) {
+    res.status(500).send(error);
+  }
 };
 
 export const deletePokemonById = async (req: Request, res: Response) => {
@@ -40,25 +60,10 @@ export const deletePokemonById = async (req: Request, res: Response) => {
   res.send(dbResponse);
 };
 
-export const deletePokemonByName = async (req: Request, res: Response) => {
-  const { query } = req;
-
-  const dbResponse = await pokemonModel.findOneAndDelete(query);
-  res.send(dbResponse);
-};
-
 export const editPokemonById = async (req: Request, res: Response) => {
   const { body, params } = req;
 
   await pokemonModel.findByIdAndUpdate(params.id, body);
   const dbResponse = await pokemonModel.findById(params.id);
-  res.send(dbResponse);
-};
-
-export const editPokemonByName = async (req: Request, res: Response) => {
-  const { body, query } = req;
-
-  await pokemonModel.findOneAndUpdate(query, body);
-  const dbResponse = await pokemonModel.findOne(query);
   res.send(dbResponse);
 };

@@ -22,14 +22,9 @@ export const createPokemon = async (req: Request, res: Response) => {
 
 export const getPokemonByName = async (req: Request, res: Response) => {
   const { name } = req.params;
-  const dbResponse = await pokemonModel.find({ name });
-  const pokemon = dbResponse[0];
+  const dbResponse = await pokemonModel.findOne({ name });
 
-  if (!pokemon) {
-    return res.status(404).send();
-  }
-
-  return res.send(pokemon);
+  return res.send(dbResponse);
 };
 
 export const listAllPokemon = async (req: Request, res: Response) => {

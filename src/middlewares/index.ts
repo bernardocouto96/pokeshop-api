@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 import cors from "cors";
-import pokemonCtrl from "../routes";
+import pokemonRoutes from "../routes/pokemon";
+import cartRoutes from "../routes/cart";
 
 const initLibs = (app: Express) => {
   app.use(express.json());
@@ -8,7 +9,8 @@ const initLibs = (app: Express) => {
 };
 
 const initRoutes = (app: Express) => {
-  app.use("/pokemon", pokemonCtrl);
+  app.use("/pokemon", pokemonRoutes);
+  app.use("/cart", cartRoutes);
 };
 
 export default (app: Express) => {
